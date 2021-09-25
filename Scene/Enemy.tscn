@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 24 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "EnemyShot"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Enemy1:frame")
@@ -22,8 +22,7 @@ tracks/0/keys = {
 "values": [ 1, 0, 4, 4 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Idle"
+[sub_resource type="Animation" id=3]
 loop = true
 step = 0.036
 tracks/0/type = "value"
@@ -39,8 +38,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 20, 21, 22, 23, 24, 25, 26, 27 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "shot"
+[sub_resource type="Animation" id=4]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -73,8 +71,8 @@ position = Vector2( 0, 8 )
 shape = SubResource( 1 )
 
 [node name="Enemy2" type="AnimationPlayer" parent="."]
-anims/EnemyShot = SubResource( 4 )
-anims/Idle = SubResource( 2 )
+anims/EnemyShot = SubResource( 2 )
+anims/Idle = SubResource( 3 )
 
 [node name="Reload" type="Timer" parent="."]
 
@@ -82,7 +80,7 @@ anims/Idle = SubResource( 2 )
 visible = false
 
 [node name="gunSplashAnim" type="AnimationPlayer" parent="Node2D"]
-anims/shot = SubResource( 3 )
+anims/shot = SubResource( 4 )
 
 [node name="GunSplash" type="Sprite" parent="Node2D"]
 position = Vector2( -48, -8 )

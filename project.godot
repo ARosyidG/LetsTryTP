@@ -24,6 +24,14 @@ config/name="LetstryTP"
 run/main_scene="res://Scene/1.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+G="*res://Scene/Global.gd"
+
+[display]
+
+window/size/always_on_top=true
+
 [input]
 
 Move_left={

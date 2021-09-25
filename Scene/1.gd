@@ -4,6 +4,9 @@ var TPtex = preload("res://assets/TP_not.png")
 var TP_inh = TP_scn.instance()
 var draw_area
 var ada: bool = false
+onready var health = $Control/CanvasLayer/Health
+onready var recovery_time = $KENA/BIARBAGUS
+onready var Kena = $KENA
 func _physics_process(delta: float) -> void:
 	var is_jump: = Input.is_action_just_released("Jump") and kecepatan.y < 0.0
 	var arah: = dapat_arah()
@@ -11,6 +14,7 @@ func _physics_process(delta: float) -> void:
 	kecepatan = move_and_slide(kecepatan, FLOOR_NORMAL)
 	TP_inh.position = position.move_toward(get_global_mouse_position(),300)
 func _ready():
+	health.connect("depleted", self, "queue_free")
 	pass
 func dapat_arah() -> Vector2:
 	return Vector2(
@@ -62,3 +66,18 @@ func calculate_move_velocity(
 	return new_kecepatan
 	
 
+
+
+func _on_KENA_body_entered(body):
+	health.current -= body.demage
+	if body.bullet :
+		body.queue_free()
+	Kena.set_deferred("monitoring", false)
+	recovery_time.start()
+	pass # Replace with function body.
+
+
+
+func _on_BIARBAGUS_timeout():
+	Kena.set_deferred("monitoring", true)
+	pass # Replace with function body.
