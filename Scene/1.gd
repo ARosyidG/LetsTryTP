@@ -47,8 +47,7 @@ func _input(event):
 		if ada:
 			get_parent().remove_child(TP_inh)
 			ada = false
-	if event.is_action_pressed("restart"):
-		get_tree().reload_current_scene()
+
 
 func calculate_move_velocity(
 	kecepatan_linear: Vector2,

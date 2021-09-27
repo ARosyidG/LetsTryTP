@@ -7,3 +7,6 @@ func _ready():
 	Player_health.connect("changed", health_bar, "set_value")
 	Player_health.connect("max_changed", health_bar, "set_max")
 	Player_health.initialize()
+func _input(event):
+	if event.is_action_pressed("restart"):
+		get_tree().reload_current_scene()
