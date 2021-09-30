@@ -1,9 +1,13 @@
 extends Player
 var TP_scn = preload("res://Scene/TP_scn.tscn")
 var TPtex = preload("res://assets/TP_not.png")
+var playerTex = preload("res://assets/Player.png")
+onready var playerSprite = get_node("Player")
 var TP_inh = TP_scn.instance()
 var draw_area
+var kenaDemage: bool = false
 var ada: bool = false
+onready var kenaDemageTime= $kenaDemageTimer
 onready var health = $Control/CanvasLayer/Health
 onready var recovery_time = $KENA/BIARBAGUS
 onready var Kena = $KENA
@@ -21,7 +25,11 @@ func dapat_arah() -> Vector2:
 		Input.get_action_strength("move_right") - Input.get_action_strength("Move_left"),
 		-1.0 if Input.get_action_strength("Jump") and is_on_floor() else 1.0
 	)
-
+func _process(delta):
+	if kenaDemage:
+		playerSprite.set_texture(TPtex)
+	else :
+		playerSprite.set_texture(playerTex)
 func _draw():
 	if draw_area:
 		draw_arc(Vector2(0,0), 300, 0, deg2rad(360), 100, Color.aqua)
@@ -69,9 +77,13 @@ func calculate_move_velocity(
 
 func _on_KENA_body_entered(body):
 	health.current -= body.demage
-	if body.bullet :
-		body.queue_free()
+	if body.bullet:
+		recovery_time.wait_time = 0.7
+		body.ngilang()
 	Kena.set_deferred("monitoring", false)
+	kenaDemage = true
+	kenaDemageTime.start()
+	
 	recovery_time.start()
 	pass # Replace with function body.
 
@@ -79,4 +91,10 @@ func _on_KENA_body_entered(body):
 
 func _on_BIARBAGUS_timeout():
 	Kena.set_deferred("monitoring", true)
+	recovery_time.wait_time = 0.2
+	pass # Replace with function body.
+
+
+func _on_kenaDemageTimer_timeout():
+	kenaDemage = false
 	pass # Replace with function body.

@@ -4,7 +4,7 @@ signal max_changed(new_max)
 signal changed(new_amount)
 signal depleted
 
-export(int) var max_amount = 10 setget set_max
+export(int) var max_amount = 100 setget set_max
 export(int) onready var current = max_amount setget set_current
 
 

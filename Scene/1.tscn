@@ -36,6 +36,9 @@ drag_margin_bottom = 0.5
 
 [node name="Control" parent="." instance=ExtResource( 3 )]
 
+[node name="kenaDemageTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [node name="KENA" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 16
@@ -44,7 +47,8 @@ collision_mask = 16
 shape = SubResource( 2 )
 
 [node name="BIARBAGUS" type="Timer" parent="KENA"]
-wait_time = 0.2
+wait_time = 0.7
 
+[connection signal="timeout" from="kenaDemageTimer" to="." method="_on_kenaDemageTimer_timeout"]
 [connection signal="body_entered" from="KENA" to="." method="_on_KENA_body_entered"]
 [connection signal="timeout" from="KENA/BIARBAGUS" to="." method="_on_BIARBAGUS_timeout"]
