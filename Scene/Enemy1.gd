@@ -7,7 +7,7 @@ var ada: bool = true
 func _ready():
 	Reload.set_wait_time(1)
 	Reload.start()
-func _process(delta):
+func _process(_delta):
 	get_node("Enemy2").play("EnemyShot")
 	pass
 func _on_Reload_timeout():

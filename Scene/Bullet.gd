@@ -6,9 +6,9 @@ onready var Animplayer = $DuarAnim/AnimationPlayer
 onready var duarAnim = $DuarAnim/bullet_Col
 onready var Bulleta = $bullet
 var stop = true
-func _process(delta):
+func _process(_delta):
 	if stop:
-		move_and_slide(Vector2(-1200,0))
+		var _move = move_and_slide(Vector2(-1200,0))
 		for i in get_slide_count():
 			var collision = get_slide_collision(i)
 			if collision:
@@ -22,7 +22,7 @@ func ngilang():
 	Animplayer.play("Duar")
 
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(_anim_name):
 	duarAnim.hide()
 	queue_free()
 	pass # Replace with function body.

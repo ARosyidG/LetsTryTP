@@ -11,7 +11,7 @@ onready var kenaDemageTime= $kenaDemageTimer
 onready var health = $Control/CanvasLayer/Health
 onready var recovery_time = $KENA/BIARBAGUS
 onready var Kena = $KENA
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var is_jump: = Input.is_action_just_released("Jump") and kecepatan.y < 0.0
 	var arah: = dapat_arah()
 	kecepatan = calculate_move_velocity(kecepatan, arah, speed, is_jump)
@@ -25,7 +25,7 @@ func dapat_arah() -> Vector2:
 		Input.get_action_strength("move_right") - Input.get_action_strength("Move_left"),
 		-1.0 if Input.get_action_strength("Jump") and is_on_floor() else 1.0
 	)
-func _process(delta):
+func _process(_delta):
 	if kenaDemage:
 		playerSprite.set_texture(TPtex)
 	else :
@@ -33,7 +33,7 @@ func _process(delta):
 func _draw():
 	if draw_area:
 		draw_arc(Vector2(0,0), 300, 0, deg2rad(360), 100, Color.aqua)
-func _input(event):
+func _input(_event):
 	if Input.is_action_pressed("RMB"):
 		draw_area = true
 		update()
@@ -46,12 +46,12 @@ func _input(event):
 			TP_inh.position = self.position
 			ada = true
 		
-	if Input.is_action_just_released("RMB") and TP_inh.is_tileMap()!=true:
+	if Input.is_action_just_released("RMB") and TP_inh.is_tileMap!=true:
 		if ada:
 			self.position=TP_inh.position
 			get_parent().remove_child(TP_inh)
 			ada = false
-	if Input.is_action_just_released("RMB") and TP_inh.is_tileMap()==true:
+	if Input.is_action_just_released("RMB") and TP_inh.is_tileMap == true:
 		if ada:
 			get_parent().remove_child(TP_inh)
 			ada = false

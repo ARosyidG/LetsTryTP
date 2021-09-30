@@ -9,4 +9,4 @@ func _ready():
 	Player_health.initialize()
 func _input(event):
 	if event.is_action_pressed("restart"):
-		get_tree().reload_current_scene()
+		var _reload = get_tree().reload_current_scene()
